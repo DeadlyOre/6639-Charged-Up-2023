@@ -20,8 +20,6 @@ public class ManualArmCommand extends CommandBase {
   public ManualArmCommand(ArmSubsystem arm, XboxController controller) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.arm = arm;
-    // this.speed = speed;
-    // this.on = on;
     this.controller = controller;
     addRequirements(arm);
   }
@@ -33,12 +31,8 @@ public class ManualArmCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (arm.getIsBrake() == false) {
-      arm.manualControl(-controller.getRightY());
-    } else {
-      arm.manualControl(0.0);
-    }
-    SmartDashboard.putBoolean("Brake", arm.getIsBrake());
+
+    arm.manualControl(-controller.getRightY());
     SmartDashboard.putNumber("encoder", arm.getEncoderValue());
   }
 

@@ -30,8 +30,6 @@ public class RobotContainer {
   
   private final DriveSubsystem mDrive = new DriveSubsystem();
   private final ArmSubsystem mArm = new ArmSubsystem();
-  private final Command simple = new SimpleAutoCommand(mDrive);
-  private final Command low = new ScoreLow(mDrive, mArm);
   private final Command easy = new EasyDrive(mDrive, -0.4, 0).withTimeout(5);
   private final Command hard = new SequentialCommandGroup(
     new AutoArmCommand(mArm, 0.3).withTimeout(2),
@@ -72,16 +70,8 @@ public class RobotContainer {
 
     JoystickButton grip = new JoystickButton(controller, XboxController.Button.kLeftBumper.value);
     grip.onTrue(new GripCommand(mArm).withTimeout(0.1));
-    JoystickButton brake = new JoystickButton(controller, XboxController.Button.kB.value);
-    brake.onTrue(new BrakeCommand(mArm).withTimeout(0.1));
     JoystickButton gearShift = new JoystickButton(controller, XboxController.Button.kX.value);
     gearShift.onTrue(new ShiftCommand(mDrive).withTimeout(0.1));
-    // JoystickButton armHiSpeed = new JoystickButton(controller, XboxController.Button.kRightBumper.value);
-    // armHiSpeed.onTrue(new SequentialCommandGroup(new BrakeCommand(mArm), new ManualArmCommand(mArm, true, true)));
-    // armHiSpeed.onFalse(new ManualArmCommand(mArm, true, false));
-    // JoystickButton armLoSpeed = new JoystickButton(controller, XboxController.Button.kLeftBumper.value);
-    // armLoSpeed.onTrue(new ManualArmCommand(mArm, false, true));
-    // armLoSpeed.onFalse(new ManualArmCommand(mArm, false, false));
     JoystickButton wrist = new JoystickButton(controller, XboxController.Button.kRightBumper.value);
     wrist.onTrue(new WristCommand(mArm).withTimeout(0.1));
 

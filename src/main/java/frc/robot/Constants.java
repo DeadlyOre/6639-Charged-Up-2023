@@ -31,12 +31,15 @@ public final class Constants {
     public static final class PCMDevices {
         public static final int HAND_FORWARD = 7;
         public static final int HAND_BACKWARD = 6;
-        public static final int BRAKE_FORWARD = 3;
-        public static final int BRAKE_BACKWARD = 2;
         public static final int GEAR_SHIFT_FORWARD = 0;
         public static final int GEAR_SHIFT_BACKWARD = 1;
         public static final int WRIST_FORWARD = 4;
         public static final int WRIST_BACKWARD = 5;
+    }
+
+    public static final class ArmLimits {
+        public static final double TOP_LIMIT = 70.0; //TODO set to correct values
+        public static final double BOTTOM_LIMIT = 0.0;
     }
 
     public static final int ENCOER_PORT = 0;
