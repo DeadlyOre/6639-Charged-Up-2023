@@ -51,8 +51,8 @@ public class RobotContainer {
     mArm.setDefaultCommand(new ManualArmCommand(mArm, controller));
     mChooser.setDefaultOption("None", null);
     mChooser.addOption("Just Drive", easy);
-    mChooser.addOption("Score and drive", hard);
-    mChooser.addOption("Just Score", justScore);
+    mChooser.addOption("Score Low and Drive", hard);
+    mChooser.addOption("Just Score Low", justScore);
 
     SmartDashboard.putData(mChooser);
   }
