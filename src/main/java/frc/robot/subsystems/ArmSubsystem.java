@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -19,6 +20,9 @@ public class ArmSubsystem extends SubsystemBase {
   private final CANSparkMax left;
   private final CANSparkMax right;
 
+  private final WPI_VictorSPX leftHandSpinner;
+  private final WPI_VictorSPX rightHandSpinner;
+
   private final DoubleSolenoid hand;
   private final DoubleSolenoid wrist;
 
@@ -31,7 +35,11 @@ public class ArmSubsystem extends SubsystemBase {
     right = new CANSparkMax(Constants.ArmSparks.RIGHT, MotorType.kBrushless);
     hand = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.PCMDevices.HAND_FORWARD, Constants.PCMDevices.HAND_BACKWARD);
     wrist = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.PCMDevices.WRIST_FORWARD, Constants.PCMDevices.WRIST_BACKWARD);
+    leftHandSpinner = new WPI_VictorSPX(Constants.HandSpinners.LEFT);
+    rightHandSpinner = new WPI_VictorSPX(Constants.HandSpinners.RIGHT);
     right.follow(left, true);
+    rightHandSpinner.setInverted(true);
+    rightHandSpinner.follow(leftHandSpinner);
     encoder = new DutyCycleEncoder(Constants.ENCOER_PORT);
     encoder.setDistancePerRotation(360.0);
     encoder.reset();
@@ -49,6 +57,18 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void grip() {
     hand.toggle();
+  }
+
+  public void handSpin(boolean direction, boolean on) {
+    if (on == true) {
+      if (direction == true) {
+        leftHandSpinner.set(0.5);
+      } else {
+        leftHandSpinner.set(0.5);
+      }
+    } else {
+      leftHandSpinner.set(0);
+    }
   }
 
   public boolean getIsWrist() {

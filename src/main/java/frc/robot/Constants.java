@@ -24,8 +24,13 @@ public final class Constants {
     }
 
     public static final class ArmSparks {
-        public static final int LEFT = 6; //TODO replace with actual values
+        public static final int LEFT = 6;
         public static final int RIGHT = 5;
+    }
+
+    public static final class HandSpinners {
+        public static final int LEFT = 0; //TODO set with actual values
+        public static final int RIGHT = 0;
     }
 
     public static final class PCMDevices {

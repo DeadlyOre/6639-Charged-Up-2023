@@ -4,23 +4,20 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ArmSubsystem;
 
-public class ManualArmCommand extends CommandBase {
-  /** Creates a new ArmCommand. */
+public class SpinnerCommand extends CommandBase {
+  /** Creates a new SpinnerCommand. */
   private final ArmSubsystem arm;
-  // private final boolean speed;
-  // private final boolean on;
-  private final XboxController controller;
+  private final boolean direction;
+  private final boolean on;
 
-
-  public ManualArmCommand(ArmSubsystem arm, XboxController controller) {
+  public SpinnerCommand(ArmSubsystem arm, boolean direction, boolean on) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.arm = arm;
-    this.controller = controller;
+    this.direction = direction;
+    this.on = on;
     addRequirements(arm);
   }
 
@@ -31,15 +28,12 @@ public class ManualArmCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-    arm.manualControl(-controller.getRightY());
-    SmartDashboard.putNumber("Arm Encoder", arm.getEncoderValue());
+    arm.handSpin(direction, on);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

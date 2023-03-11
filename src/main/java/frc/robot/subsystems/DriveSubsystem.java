@@ -4,7 +4,7 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenixpro.hardware.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
@@ -12,18 +12,19 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 // import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveSubsystem extends SubsystemBase {
   /** Creates a new DriveSubsystem. */
 
-  private final TalonFX left1;
-  private final TalonFX left2;
-  private final TalonFX left3;
-  private final TalonFX right1;
-  private final TalonFX right2;
-  private final TalonFX right3;
+  private final WPI_VictorSPX left1;
+  private final WPI_VictorSPX left2;
+  private final WPI_VictorSPX left3;
+  private final WPI_VictorSPX right1;
+  private final WPI_VictorSPX right2;
+  private final WPI_VictorSPX right3;
 
   private final DifferentialDrive mDrive;
 
@@ -35,12 +36,12 @@ public class DriveSubsystem extends SubsystemBase {
   private final DoubleSolenoid gearShfit;
 
   public DriveSubsystem() {
-    left1 = new TalonFX(Constants.DriveMotors.LEFT1);
-    left2 = new TalonFX(Constants.DriveMotors.LEFT2);
-    left3 = new TalonFX(Constants.DriveMotors.LEFT3);
-    right1 = new TalonFX(Constants.DriveMotors.RIGHT1);
-    right2 = new TalonFX(Constants.DriveMotors.RIGHT2);
-    right3 = new TalonFX(Constants.DriveMotors.RIGHT3);
+    left1 = new WPI_VictorSPX(Constants.DriveMotors.LEFT1);
+    left2 = new WPI_VictorSPX(Constants.DriveMotors.LEFT2);
+    left3 = new WPI_VictorSPX(Constants.DriveMotors.LEFT3);
+    right1 = new WPI_VictorSPX(Constants.DriveMotors.RIGHT1);
+    right2 = new WPI_VictorSPX(Constants.DriveMotors.RIGHT2);
+    right3 = new WPI_VictorSPX(Constants.DriveMotors.RIGHT3);
 
     //fleft = new CANcoder(left1.getDeviceID());
     //fright = new CANcoder (right1.getDeviceID());
@@ -65,17 +66,17 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void drive (double forward, double clockwise){
     mDrive.arcadeDrive(forward, clockwise); 
-    left1.getPosition().refresh();
-    //System.out.println (left1.getPosition().getValue()); 
   }
 
   public void shift() {
     gearShfit.toggle();
-  }
-
-  public double getPosition () {
-    left1.getPosition().refresh();
-    return left1.getPosition().getValue();
+    if (isShift == false) {
+      isShift = true;
+      SmartDashboard.putString("Gear Shift", "High Gear"); //TODO: Set this stuff correctly
+    } else {
+      isShift = false;
+      SmartDashboard.putString("Gear Shift", "Low Gear");
+    }
   }
 
   public boolean getShift() {
