@@ -69,15 +69,8 @@ public class RobotContainer {
     grip.onTrue(new GripCommand(mArm).withTimeout(0.1));
     JoystickButton gearShift = new JoystickButton(controller, XboxController.Button.kX.value);
     gearShift.onTrue(new ShiftCommand(mDrive).withTimeout(0.1));
-    JoystickButton wrist = new JoystickButton(controller, XboxController.Button.kRightBumper.value);
+    JoystickButton wrist = new JoystickButton(controller, XboxController.Button.kY.value);
     wrist.onTrue(new WristCommand(mArm).withTimeout(0.1));
-    JoystickButton spinIntake = new JoystickButton(controller, XboxController.Button.kA.value);
-    spinIntake.onTrue(new SpinnerCommand(mArm, true, true));
-    spinIntake.onFalse(new SpinnerCommand(mArm, true, false));
-    JoystickButton spinDrop = new JoystickButton(controller, XboxController.Button.kB.value);
-    spinDrop.onTrue(new SpinnerCommand(mArm, false, true));
-    spinDrop.onFalse(new SpinnerCommand(mArm, false, false));
-
   }
 
   /**

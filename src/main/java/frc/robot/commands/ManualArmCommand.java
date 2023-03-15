@@ -31,7 +31,17 @@ public class ManualArmCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    double rightTrigger = controller.getRightTriggerAxis();
+    double leftTrigger = controller.getLeftTriggerAxis();
+    if (rightTrigger >= 0.1) {
+      arm.handSpin(true, true);
+    }
+    else if (leftTrigger >= 0.1) {
+      arm.handSpin(false, true);
+    }
+    else {
+      arm.handSpin(true, false);
+    }
     arm.manualControl(-controller.getRightY());
     SmartDashboard.putNumber("Arm Encoder", arm.getEncoderValue());
   }

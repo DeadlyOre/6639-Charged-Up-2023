@@ -15,12 +15,12 @@ package frc.robot;
 public final class Constants {
 
     public static final class DriveMotors {
-        public static final int LEFT1 = 1;
-        public static final int LEFT2 = 3;
+        public static final int LEFT1 = 0;
+        public static final int LEFT2 = 6;
         public static final int LEFT3 = 5;
-        public static final int RIGHT1 = 6;
+        public static final int RIGHT1 = 2;
         public static final int RIGHT2 = 4;
-        public static final int RIGHT3 = 2;
+        public static final int RIGHT3 = 7;
     }
 
     public static final class ArmSparks {
@@ -29,13 +29,13 @@ public final class Constants {
     }
 
     public static final class HandSpinners {
-        public static final int LEFT = 0; //TODO set with actual values
-        public static final int RIGHT = 0;
+        public static final int LEFT = 3;
+        public static final int RIGHT = 1;
     }
 
     public static final class PCMDevices {
-        public static final int HAND_FORWARD = 7;
-        public static final int HAND_BACKWARD = 6;
+        public static final int HAND_FORWARD = 2;
+        public static final int HAND_BACKWARD = 3;
         public static final int GEAR_SHIFT_FORWARD = 0;
         public static final int GEAR_SHIFT_BACKWARD = 1;
         public static final int WRIST_FORWARD = 4;
@@ -43,8 +43,8 @@ public final class Constants {
     }
 
     public static final class ArmLimits {
-        public static final double TOP_LIMIT = 70.0; //TODO set to correct values
-        public static final double BOTTOM_LIMIT = 0.0;
+        public static final double TOP_LIMIT = 90.0; //TODO set to correct values
+        public static final double BOTTOM_LIMIT = -2;
     }
 
     public static final int ENCOER_PORT = 0;

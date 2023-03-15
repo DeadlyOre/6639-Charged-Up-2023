@@ -26,6 +26,8 @@ public class DriveSubsystem extends SubsystemBase {
   private final WPI_VictorSPX right2;
   private final WPI_VictorSPX right3;
 
+  private final double correction = 0.0;
+
   private final DifferentialDrive mDrive;
 
   //private final CANcoder fleft;
@@ -43,11 +45,12 @@ public class DriveSubsystem extends SubsystemBase {
     right2 = new WPI_VictorSPX(Constants.DriveMotors.RIGHT2);
     right3 = new WPI_VictorSPX(Constants.DriveMotors.RIGHT3);
 
-    //fleft = new CANcoder(left1.getDeviceID());
-    //fright = new CANcoder (right1.getDeviceID());
-
-   // fleft.setPosition(0);
-    //fright.setPosition(0);
+    left1.configFactoryDefault();
+    left2.configFactoryDefault();
+    left3.configFactoryDefault();
+    right1.configFactoryDefault();
+    right2.configFactoryDefault();
+    right3.configFactoryDefault();
 
     left2.setInverted(true);
 
@@ -59,12 +62,18 @@ public class DriveSubsystem extends SubsystemBase {
     MotorControllerGroup left = new MotorControllerGroup(left1, left2, left3);
     MotorControllerGroup right = new MotorControllerGroup(right1, right2, right3);
 
-    gearShfit.set(Value.kForward);
-
     mDrive = new DifferentialDrive(left, right);
   }
 
   public void drive (double forward, double clockwise){
+    // Correction factor calculation
+    double x = forward * correction;
+    clockwise = clockwise + x;
+    if (clockwise > 1.0) {
+      clockwise = 1.0;
+    } else if (clockwise < -1.0) {
+      clockwise = -1.0;
+    }
     mDrive.arcadeDrive(forward, clockwise); 
   }
 
@@ -72,11 +81,15 @@ public class DriveSubsystem extends SubsystemBase {
     gearShfit.toggle();
     if (isShift == false) {
       isShift = true;
-      SmartDashboard.putString("Gear Shift", "High Gear"); //TODO: Set this stuff correctly
+      SmartDashboard.putString("Gear Shift", "Low Gear"); //TODO: Set this stuff correctly
     } else {
       isShift = false;
-      SmartDashboard.putString("Gear Shift", "Low Gear");
+      SmartDashboard.putString("Gear Shift", "High Gear");
     }
+  }
+
+  public void shiftInit() {
+    gearShfit.set(Value.kForward);
   }
 
   public boolean getShift() {
