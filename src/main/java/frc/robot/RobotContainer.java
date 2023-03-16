@@ -73,6 +73,10 @@ public class RobotContainer {
     wrist.onTrue(new WristCommand(mArm).withTimeout(0.1));
   }
 
+  public void driveShiftInit() {
+    mDrive.shiftInit();
+  }
+
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *

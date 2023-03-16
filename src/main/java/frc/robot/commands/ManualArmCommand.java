@@ -34,10 +34,10 @@ public class ManualArmCommand extends CommandBase {
     double rightTrigger = controller.getRightTriggerAxis();
     double leftTrigger = controller.getLeftTriggerAxis();
     if (rightTrigger >= 0.1) {
-      arm.handSpin(true, true);
+      arm.handSpin(false, true);
     }
     else if (leftTrigger >= 0.1) {
-      arm.handSpin(false, true);
+      arm.handSpin(true, true);
     }
     else {
       arm.handSpin(true, false);

@@ -11,6 +11,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -37,11 +38,13 @@ public class ArmSubsystem extends SubsystemBase {
     leftHandSpinner = new WPI_VictorSPX(Constants.HandSpinners.LEFT);
     rightHandSpinner = new WPI_VictorSPX(Constants.HandSpinners.RIGHT);
     right.follow(left, true);
-    rightHandSpinner.setInverted(true);
+    rightHandSpinner.setInverted(false);
     rightHandSpinner.follow(leftHandSpinner);
     encoder = new DutyCycleEncoder(Constants.ENCOER_PORT);
     encoder.setDistancePerRotation(360.0);
     encoder.reset();
+    wrist.set(Value.kReverse);
+    hand.set(Value.kForward);
   }
 
   public void manualControl(double speed) {
@@ -67,9 +70,9 @@ public class ArmSubsystem extends SubsystemBase {
   public void handSpin(boolean direction, boolean on) {
     if (on == true) {
       if (direction == true) {
-        leftHandSpinner.set(0.5);
+        leftHandSpinner.set(0.3);
       } else {
-        leftHandSpinner.set(-0.5);
+        leftHandSpinner.set(-0.3);
       }
     } else {
       leftHandSpinner.set(0);

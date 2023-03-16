@@ -43,7 +43,7 @@ public final class Constants {
     }
 
     public static final class ArmLimits {
-        public static final double TOP_LIMIT = 90.0; //TODO set to correct values
+        public static final double TOP_LIMIT = 95.0; //TODO set to correct values
         public static final double BOTTOM_LIMIT = -2;
     }
 

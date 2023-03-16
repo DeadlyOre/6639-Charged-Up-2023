@@ -63,6 +63,8 @@ public class DriveSubsystem extends SubsystemBase {
     MotorControllerGroup right = new MotorControllerGroup(right1, right2, right3);
 
     mDrive = new DifferentialDrive(left, right);
+
+    gearShfit.set(Value.kForward);
   }
 
   public void drive (double forward, double clockwise){
@@ -90,6 +92,7 @@ public class DriveSubsystem extends SubsystemBase {
 
   public void shiftInit() {
     gearShfit.set(Value.kForward);
+    SmartDashboard.putString("Gear Shift", "High Gear (init)");
   }
 
   public boolean getShift() {
