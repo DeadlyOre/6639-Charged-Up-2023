@@ -30,15 +30,15 @@ public class RobotContainer {
   
   private final DriveSubsystem mDrive = new DriveSubsystem();
   private final ArmSubsystem mArm = new ArmSubsystem();
-  private final Command easy = new EasyDrive(mDrive, -0.4, 0).withTimeout(5);
+  private final Command easy = new EasyDrive(mDrive, -0.5, 0).withTimeout(6);
   private final Command hard = new SequentialCommandGroup(
-    new AutoArmCommand(mArm, 0.3).withTimeout(2),
+    new AutoArmCommand(mArm, 0.2).withTimeout(1),
     new WristCommand(mArm).withTimeout(0.1),
     new GripCommand(mArm).withTimeout(2),
-    new EasyDrive(mDrive, -0.4, 0).withTimeout(6)
+    new EasyDrive(mDrive, -0.5, 0).withTimeout(6)
   );
   private final Command justScore = new SequentialCommandGroup(
-    new AutoArmCommand(mArm, 0.3).withTimeout(2),
+    new AutoArmCommand(mArm, 0.2).withTimeout(1),
     new WristCommand(mArm).withTimeout(0.1),
     new GripCommand(mArm).withTimeout(2)
   );
@@ -75,6 +75,10 @@ public class RobotContainer {
 
   public void driveShiftInit() {
     mDrive.shiftInit();
+  }
+
+  public void armEncoderInit() {
+    mArm.resetEncoder();
   }
 
   /**

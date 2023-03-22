@@ -70,6 +70,7 @@ public class Robot extends TimedRobot {
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     m_robotContainer.driveShiftInit(); // Set gear shift initialize
+    m_robotContainer.armEncoderInit(); // reset encoder to zero
     
 
     // schedule the autonomous command (example)

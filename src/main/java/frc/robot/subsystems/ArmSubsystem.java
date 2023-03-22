@@ -50,17 +50,21 @@ public class ArmSubsystem extends SubsystemBase {
   public void manualControl(double speed) {
     if (speed >= 0) {
       speed = speed * (4.0 / 5.0);
-      if (encoder.getDistance() > Constants.ArmLimits.TOP_LIMIT) {
-        speed = 0;
-      }
+      // if (encoder.getDistance() > Constants.ArmLimits.TOP_LIMIT) {
+      //   speed = 0;
+      // }
     } else if (speed < 0) {
       speed = speed * (1.0 / 5.0);
-      if (encoder.getDistance() < Constants.ArmLimits.BOTTOM_LIMIT) {
-        speed = 0;
-      }
+      // if (encoder.getDistance() < Constants.ArmLimits.BOTTOM_LIMIT) {
+      //   speed = 0;
+      // }
     }
 
     left.set(speed);
+  }
+
+  public void resetEncoder() {
+    encoder.reset();
   }
 
   public void grip() {

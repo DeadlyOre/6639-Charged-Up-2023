@@ -44,7 +44,7 @@ public final class Constants {
 
     public static final class ArmLimits {
         public static final double TOP_LIMIT = 95.0; //TODO set to correct values
-        public static final double BOTTOM_LIMIT = -2;
+        public static final double BOTTOM_LIMIT = -5.0;
     }
 
     public static final int ENCOER_PORT = 0;
