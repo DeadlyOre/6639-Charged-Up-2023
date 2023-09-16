@@ -49,7 +49,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void manualControl(double speed) {
     if (speed >= 0) {
-      speed = speed * (4.0 / 5.0);
+      speed = speed * (1.0 / 2.0);
       // if (encoder.getDistance() > Constants.ArmLimits.TOP_LIMIT) {
       //   speed = 0;
       // }
@@ -63,7 +63,7 @@ public class ArmSubsystem extends SubsystemBase {
     left.set(speed);
   }
 
-  public void resetEncoder() {
+  public void resetEncoder() { 
     encoder.reset();
   }
 
